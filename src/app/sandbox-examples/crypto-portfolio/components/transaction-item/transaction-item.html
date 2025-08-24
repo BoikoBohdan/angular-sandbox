@@ -1,0 +1,20 @@
+<div class="transaction-card">
+  <div class="transaction-type" [class.buy]="transaction.action === 'buy'" [class.sell]="transaction.action === 'sell'">
+    {{ transaction.action.toUpperCase() }}
+  </div>
+
+  <div class="transaction-details">
+    <div class="crypto-pair">
+      <span class="symbol">{{ transaction.assetName }}</span>
+      <span class="amount">{{ transaction.amount.toLocaleString() }}</span>
+    </div>
+    <div class="transaction-meta">
+      <span class="price">${{ transaction.totalPrice.toLocaleString('en-US', {minimumFractionDigits: 2}) }}</span>
+      <span class="date">{{ transaction.date }}</span>
+    </div>
+  </div>
+
+  <div class="transaction-value">
+    ${{ (transaction.amount * transaction.totalPrice).toLocaleString('en-US', {minimumFractionDigits: 2}) }}
+  </div>
+</div>

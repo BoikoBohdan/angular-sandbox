@@ -1,0 +1,63 @@
+// Transaction Item Styles
+.transaction-card
+  background: white
+  border-radius: 12px
+  padding: 1.5rem
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08)
+  border: 1px solid #f8f9fa
+  display: flex
+  align-items: center
+  gap: 1.5rem
+  transition: all 0.3s ease
+
+  &:hover
+    transform: translateY(-2px)
+    box-shadow: 0 6px 25px rgba(0,0,0,0.12)
+
+.transaction-type
+  padding: 0.5rem 1rem
+  border-radius: 20px
+  font-weight: 700
+  font-size: 0.8rem
+  text-transform: uppercase
+
+  &.buy
+    background: rgba(40, 167, 69, 0.1)
+    color: #28a745
+
+  &.sell
+    background: rgba(220, 53, 69, 0.1)
+    color: #dc3545
+
+.transaction-details
+  flex: 1
+
+.crypto-pair
+  display: flex
+  align-items: center
+  gap: 0.5rem
+  margin-bottom: 0.25rem
+
+.symbol
+  font-weight: 700
+  color: #2c3e50
+
+.amount
+  color: #6c757d
+
+.transaction-meta
+  display: flex
+  gap: 1rem
+  font-size: 0.9rem
+  color: #6c757d
+
+.price
+  color: #6c757d
+
+.date
+  color: #6c757d
+
+.transaction-value
+  font-weight: 700
+  font-size: 1.1rem
+  color: #2c3e50

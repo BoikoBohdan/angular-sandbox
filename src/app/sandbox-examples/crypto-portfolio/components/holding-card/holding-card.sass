@@ -1,0 +1,118 @@
+// Holding Card Styles
+.holding-card
+  background: white
+  border-radius: 16px
+  padding: 2rem
+  box-shadow: 0 6px 30px rgba(0,0,0,0.08)
+  border: 2px solid #f8f9fa
+  transition: all 0.3s ease
+
+  &:hover
+    transform: translateY(-4px)
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15)
+    border-color: #e9ecef
+
+.crypto-info
+  display: flex
+  align-items: center
+  margin-bottom: 1.5rem
+
+.crypto-icon
+  width: 50px
+  height: 50px
+  border-radius: 50%
+  display: flex
+  align-items: center
+  justify-content: center
+  font-weight: 700
+  color: white
+  margin-right: 1rem
+  font-size: 0.9rem
+
+  &.btc
+    background: linear-gradient(135deg, #f7931a, #f2a600)
+
+  &.eth
+    background: linear-gradient(135deg, #627eea, #4169e1)
+
+  &.ada
+    background: linear-gradient(135deg, #0033ad, #1e3a8a)
+
+  &.dot
+    background: linear-gradient(135deg, #e6007a, #d946ef)
+
+  &.sol
+    background: linear-gradient(135deg, #9945ff, #14f195)
+
+  &.matic
+    background: linear-gradient(135deg, #8247e5, #6366f1)
+
+  &.link
+    background: linear-gradient(135deg, #375bd2, #2563eb)
+
+.crypto-details
+  display: flex
+  flex-direction: column
+
+.crypto-name
+  font-weight: 600
+  color: #2c3e50
+  font-size: 1.1rem
+
+.crypto-symbol
+  color: #6c757d
+  font-size: 0.9rem
+
+.holding-stats
+  margin-bottom: 1.5rem
+
+.stat-row
+  display: flex
+  justify-content: space-between
+  margin-bottom: 0.75rem
+
+  &:last-child
+    margin-bottom: 0
+
+.label
+  color: #6c757d
+  font-weight: 500
+
+.value
+  font-weight: 600
+  color: #2c3e50
+
+  &.positive
+    color: #28a745
+
+  &.negative
+    color: #dc3545
+
+.holding-actions
+  display: flex
+  gap: 1rem
+
+.action-btn
+  flex: 1
+  padding: 0.75rem
+  border: none
+  border-radius: 8px
+  font-weight: 600
+  cursor: pointer
+  transition: all 0.3s ease
+
+  &.buy
+    background: linear-gradient(135deg, #28a745, #20c997)
+    color: white
+
+    &:hover
+      background: linear-gradient(135deg, #218838, #1fa884)
+      transform: translateY(-1px)
+
+  &.sell
+    background: linear-gradient(135deg, #dc3545, #e83e8c)
+    color: white
+
+    &:hover
+      background: linear-gradient(135deg, #c82333, #d91a72)
+      transform: translateY(-1px)

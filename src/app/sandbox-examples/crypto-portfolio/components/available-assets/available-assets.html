@@ -1,0 +1,39 @@
+<div class="available-assets">
+  <div class="assets-header">
+    <h3>💎 Available Assets</h3>
+  </div>
+
+  <div class="assets-list">
+    @for (asset of availableAssets$ | async; track asset.symbol) {
+      <div class="asset-item">
+        <div class="asset-info">
+          <div class="asset-icon" [class]="asset.symbol.toLowerCase()">{{ asset.symbol }}</div>
+          <div class="asset-details">
+            <span class="asset-name">{{ asset.name }}</span>
+            <span class="asset-symbol">{{ asset.symbol }}</span>
+          </div>
+        </div>
+
+        <div class="quantity-control">
+          <label class="quantity-label">Quantity:</label>
+          <div class="quantity-input">
+            <button class="quantity-btn decrement" (click)="decrementQuantity(asset.symbol)">−</button>
+            <input
+              type="number"
+              class="quantity-field"
+              [value]="getQuantity(asset.symbol)"
+              (input)="updateQuantity(asset.symbol, $event.target.value)"
+              min="1"
+              max="999">
+            <button class="quantity-btn increment" (click)="incrementQuantity(asset.symbol)">+</button>
+          </div>
+        </div>
+
+        <div class="asset-actions">
+          <button class="action-btn buy-btn" (click)="onBuyAsset(asset)">Buy</button>
+          <button class="action-btn sell-btn" (click)="onSellAsset(asset)">Sell</button>
+        </div>
+      </div>
+    }
+  </div>
+</div>

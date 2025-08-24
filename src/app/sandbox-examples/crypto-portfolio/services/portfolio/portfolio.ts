@@ -1,23 +1,31 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, exhaustMap, map, tap } from 'rxjs';
-import { AssetList } from '../asset-list/asset-list';
+import { BehaviorSubject, combineLatest, exhaustMap, map, Observable, takeLast, tap } from 'rxjs';
+import { AssetInfo, AssetList } from '../asset-list/asset-list';
 
-interface PortfolioAsset {
+export interface PortfolioAsset {
   id: string;
   assetId: string;
   amount: number;
 }
 
+export type PortfolioAssetWithAssetInfo = PortfolioAsset &
+  AssetInfo & {
+    totalPrice: number;
+  };
 interface PortfolioUpsertTransaction {
   assetId: string;
   amount: number;
+  action: 'buy' | 'sell';
 }
 
-interface PortfolioHistory {
+export interface PortfolioHistory {
   id: string;
   assetId: string;
   amount: number;
   totalPrice: number;
+  date: string;
+  action: 'buy' | 'sell';
+  assetName: string;
 }
 
 @Injectable({
@@ -25,24 +33,36 @@ interface PortfolioHistory {
 })
 export class Portfolio {
   private assetList = inject(AssetList);
-  private portfolioName$ = new BehaviorSubject<string>('');
   private portfolioAssets$ = new BehaviorSubject<PortfolioAsset[]>([]);
   private portfolioHistory$ = new BehaviorSubject<PortfolioHistory[]>([]);
 
-  getPortfolioName() {
-    return this.portfolioName$.asObservable();
-  }
-
-  setPortfolioName(name: string) {
-    this.portfolioName$.next(name);
-  }
-
-  getPortfolioAssets() {
+  getPortfolioAssets(): Observable<PortfolioAssetWithAssetInfo[]> {
     return combineLatest([this.portfolioAssets$, this.assetList.getAssets()]).pipe(
       map(([portfolioAssets, assetList]) => {
         return portfolioAssets.map((portfolioAsset) => {
           const asset = assetList.find((asset) => asset.id === portfolioAsset.assetId);
-          return { ...portfolioAsset, totalPrice: portfolioAsset.amount * (asset?.price ?? 0) };
+          return {
+            ...portfolioAsset,
+            totalPrice: portfolioAsset.amount * (asset?.price ?? 0),
+            name: asset?.name ?? '',
+            price: asset?.price ?? 0,
+            symbol: asset?.symbol ?? '',
+          };
+        });
+      })
+    );
+  }
+
+  getPortfolioHistory(): Observable<PortfolioHistory[]> {
+    return combineLatest([this.portfolioHistory$, this.assetList.getAssets()]).pipe(
+      map(([portfolioHistory, assetList]) => {
+        return portfolioHistory.map((history) => {
+          const asset = assetList.find((asset) => asset.id === history.assetId);
+          return {
+            ...history,
+            totalPrice: history.amount * (asset?.price ?? 0),
+            assetName: asset?.name ?? '',
+          };
         });
       })
     );
@@ -50,71 +70,54 @@ export class Portfolio {
 
   getPortfolioTotal() {
     return this.getPortfolioAssets().pipe(
-      map((portfolioAssets) => portfolioAssets.reduce((acc, asset) => acc + asset.totalPrice, 0))
-    );
-  }
-
-  getPortfolioTotalHistory() {
-    return this.portfolioHistory$.asObservable();
-  }
-
-  updatePortfolioHistory(transaction: PortfolioUpsertTransaction) {
-    this.assetList.getAssets().pipe(
-      map((assetList) => assetList.find((asset) => asset.id === transaction.assetId)),
-      tap((asset) => {
-        this.portfolioHistory$.next([
-          ...this.portfolioHistory$.value,
-          {
-            id: crypto.randomUUID(),
-            assetId: transaction.assetId,
-            amount: transaction.amount,
-            totalPrice: transaction.amount * (asset?.price ?? 0),
-          },
-        ]);
-      })
-    );
-  }
-
-  upsertPortfolioAsset(transaction: PortfolioUpsertTransaction) {
-    const asset = this.portfolioAssets$.value.find(
-      (asset) => asset.assetId === transaction.assetId
-    );
-    this.updatePortfolioHistory(transaction);
-    if (asset) {
-      this.updatePortfolioAsset(transaction);
-    } else {
-      this.addPortfolioAsset(transaction);
-    }
-  }
-
-  updatePortfolioAsset(transaction: PortfolioUpsertTransaction) {
-    this.portfolioAssets$.next(
-      this.portfolioAssets$.value.map((asset) =>
-        asset.assetId === transaction.assetId ? { ...asset, amount: transaction.amount } : asset
+      map((portfolioAssets) =>
+        portfolioAssets.reduce((acc, asset) => acc + asset.amount * asset.price, 0)
       )
     );
   }
 
-  addPortfolioAsset(transaction: PortfolioUpsertTransaction) {
-    const isValidAsset = this.assetList.isValidAsset(transaction.assetId);
-    if (!isValidAsset) {
-      throw new Error('Invalid asset ID');
-    }
-
-    this.portfolioAssets$.next([
-      ...this.portfolioAssets$.value,
-      {
-        id: crypto.randomUUID(),
-        assetId: transaction.assetId,
-        amount: transaction.amount,
-      },
-    ]);
+  updatePortfolioHistory(transaction: PortfolioUpsertTransaction) {
+    const newTransaction = {
+      id: crypto.randomUUID(),
+      assetId: transaction.assetId,
+      amount: transaction.amount,
+      totalPrice: 0,
+      date: new Date().toISOString(),
+      action: transaction.action,
+      assetName: '',
+    };
+    console.log('newTransaction', newTransaction, crypto.randomUUID());
+    this.portfolioHistory$.next([...this.portfolioHistory$.value, newTransaction]);
   }
 
-  removePortfolioAsset(assetId: string) {
-    this.portfolioAssets$.next(
-      this.portfolioAssets$.value.filter((asset) => asset.assetId !== assetId)
+  buyPortfolioAsset(transaction: PortfolioUpsertTransaction) {
+    const currentAsset = this.portfolioAssets$.value;
+    const asset = currentAsset.find((asset) => asset.assetId === transaction.assetId);
+    if (!asset) {
+      this.portfolioAssets$.next([
+        ...currentAsset,
+        { id: crypto.randomUUID(), assetId: transaction.assetId, amount: transaction.amount },
+      ]);
+      return;
+    } else {
+      const updatedAsset = currentAsset.map((asset) =>
+        asset.assetId === transaction.assetId
+          ? { ...asset, amount: asset.amount + transaction.amount }
+          : asset
+      );
+      this.portfolioAssets$.next(updatedAsset);
+      this.updatePortfolioHistory(transaction);
+    }
+  }
+
+  sellPortfolioAsset(transaction: PortfolioUpsertTransaction) {
+    const currentAsset = this.portfolioAssets$.value;
+    const updatedAsset = currentAsset.map((asset) =>
+      asset.assetId === transaction.assetId
+        ? { ...asset, amount: asset.amount - transaction.amount }
+        : asset
     );
-    this.updatePortfolioHistory({ assetId, amount: 0 });
+    this.portfolioAssets$.next(updatedAsset);
+    this.updatePortfolioHistory(transaction);
   }
 }

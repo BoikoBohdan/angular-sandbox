@@ -1,0 +1,24 @@
+<div class="holding-card">
+  <div class="crypto-info">
+    <div class="crypto-icon" [class]="holding.symbol.toLowerCase()">{{ holding.symbol }}</div>
+    <div class="crypto-details">
+      <span class="crypto-name">{{ holding.name }}</span>
+      <span class="crypto-symbol">{{ holding.symbol }}</span>
+    </div>
+  </div>
+
+  <div class="holding-stats">
+    <div class="stat-row">
+      <span class="label">Amount:</span>
+      <span class="value">{{ holding.amount.toLocaleString() }}</span>
+    </div>
+    <div class="stat-row">
+      <span class="label">Price:</span>
+      <span class="value">${{ holding.price.toLocaleString('en-US', {minimumFractionDigits: 2}) }}</span>
+    </div>
+    <div class="stat-row">
+      <span class="label">Value:</span>
+      <span class="value">${{ holding.totalPrice.toLocaleString('en-US', {minimumFractionDigits: 2}) }}</span>
+    </div>
+  </div>
+</div>

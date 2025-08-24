@@ -1,1 +1,38 @@
-<p>crypto-portfolio works!</p>
+<div class="crypto-portfolio-container">
+  <div class="header-section">
+    <h1 class="main-title">💰 Crypto Portfolio</h1>
+    <p class="subtitle">Track your cryptocurrency investments</p>
+  </div>
+
+  <!-- Portfolio Overview Row -->
+  <div class="overview-row">
+    <app-portfolio-overview></app-portfolio-overview>
+    <app-available-assets></app-available-assets>
+  </div>
+
+  <!-- Holdings Section -->
+  <div class="holdings-section">
+    <div class="section-header">
+      <h2>🏦 Your Holdings</h2>
+    </div>
+
+    <div class="holdings-grid">
+      @for (holding of portfolioAssets$ | async; track holding.assetId) {
+      <app-holding-card [holding]="holding"> </app-holding-card>
+      }
+    </div>
+  </div>
+
+  <!-- Recent Transactions -->
+  <div class="transactions-section">
+    <div class="section-header">
+      <h2>📊 Recent Transactions</h2>
+    </div>
+
+    <div class="transactions-list">
+      @for (transaction of recentTransactions$ | async; track transaction.id) {
+      <app-transaction-item [transaction]="transaction"></app-transaction-item>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+// Portfolio Overview Styles
+.portfolio-overview
+  display: grid
+  gap: 2rem
+  margin-bottom: 3rem
+  margin-right: 3rem
+
+.overview-card
+  background: white
+  border-radius: 16px
+  padding: 2rem
+  box-shadow: 0 6px 30px rgba(0,0,0,0.1)
+  border: 2px solid transparent
+  transition: all 0.3s ease
+
+  &.total-value
+    border-color: #28a745
+
+    &:hover
+      transform: translateY(-4px)
+      box-shadow: 0 12px 40px rgba(40, 167, 69, 0.2)
+
+.card-header
+  display: flex
+  justify-content: space-between
+  align-items: center
+  margin-bottom: 1.5rem
+
+  h3
+    margin: 0
+    color: #2c3e50
+    font-size: 1.2rem
+
+.currency
+  background: #f8f9fa
+  padding: 0.5rem 1rem
+  border-radius: 20px
+  font-weight: 600
+  color: #6c757d
+  font-size: 0.9rem
+
+.main-value
+  font-size: 2.8rem
+  font-weight: 700
+  color: #2c3e50
+  display: block
+  margin-bottom: 0.75rem
+
+.change-indicator
+  display: flex
+  align-items: center
+  gap: 0.5rem
+
+  &.positive
+    .change-amount, .change-percent
+      color: #28a745
+
+  &.negative
+    .change-amount, .change-percent
+      color: #dc3545
+
+.change-amount
+  font-size: 1.2rem
+  font-weight: 600
+
+.change-percent
+  font-size: 1rem
+  font-weight: 500
+
+// Quick Stats
+.quick-stats
+  background: white
+  border-radius: 16px
+  padding: 2rem
+  box-shadow: 0 6px 30px rgba(0,0,0,0.1)
+  display: flex
+  flex-direction: column
+  gap: 1.5rem
+
+.stat-item
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+.stat-label
+  color: #6c757d
+  font-weight: 500
+
+.stat-value
+  font-weight: 700
+  color: #2c3e50
+
+  &.positive
+    color: #28a745
+
+  &.negative
+    color: #dc3545
+
+// Responsive
+@media (max-width: 768px)
+  .portfolio-overview
+    grid-template-columns: 1fr
+
+  .main-value
+    font-size: 2.2rem
