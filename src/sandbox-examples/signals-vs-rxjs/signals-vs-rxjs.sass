@@ -1,0 +1,478 @@
+.state-management-container
+  max-width: 1400px
+  margin: 0 auto
+  padding: 2rem
+  min-height: calc(100vh - 200px)
+
+.header-section
+  text-align: center
+  margin-bottom: 3rem
+  padding: 2rem
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+  border-radius: 16px
+  color: white
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1)
+
+.main-title
+  font-size: 2.5rem
+  font-weight: 700
+  margin-bottom: 0.5rem
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3)
+
+.subtitle
+  font-size: 1.1rem
+  opacity: 0.9
+  font-weight: 300
+  margin: 0
+
+// Reuse explanation section styles
+.explanation-section
+  background: white
+  border-radius: 12px
+  padding: 2rem
+  margin: 2rem 0
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08)
+  border: 1px solid rgba(0,0,0,0.06)
+
+  h2
+    color: #2c3e50
+    margin-bottom: 1.5rem
+    font-size: 1.5rem
+    font-weight: 700
+    text-align: center
+
+.steps-list
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef)
+  border-radius: 8px
+  padding: 1.5rem
+  margin-bottom: 2rem
+  counter-reset: step-counter
+
+  li
+    margin-bottom: 1rem
+    padding-left: 0.5rem
+    color: #2c3e50
+    line-height: 1.6
+
+    &:last-child
+      margin-bottom: 0
+
+    strong
+      color: #3498db
+
+.comparison-grid
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr))
+  gap: 1.5rem
+  margin-bottom: 2rem
+
+.comparison-card
+  border-radius: 8px
+  padding: 1.5rem
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1)
+  transition: all 0.3s ease
+
+  &:hover
+    transform: translateY(-2px)
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15)
+
+  h3
+    margin-bottom: 1rem
+    font-size: 1.2rem
+    font-weight: 600
+    display: flex
+    align-items: center
+    gap: 0.5rem
+
+  ul
+    list-style: none
+    margin: 0
+    padding: 0
+
+    li
+      margin-bottom: 0.75rem
+      padding-left: 1.5rem
+      position: relative
+      line-height: 1.5
+      color: #2c3e50
+
+      &:last-child
+        margin-bottom: 0
+
+      strong
+        font-weight: 600
+
+.signals-cd
+  background: linear-gradient(135deg, #e8f5e8, #d4edda)
+  border-left: 4px solid #28a745
+
+  h3
+    color: #155724
+
+.rxjs-cd
+  background: linear-gradient(135deg, #fff3cd, #fce4ec)
+  border-left: 4px solid #fd7e14
+
+  h3
+    color: #721c24
+
+.test-instruction
+  background: linear-gradient(135deg, #cce5ff, #e6f3ff)
+  border: 1px solid #b3d9ff
+  border-radius: 8px
+  padding: 1.25rem
+  margin: 0
+  color: #0056b3
+  line-height: 1.6
+  text-align: center
+
+  strong
+    color: #003d82
+
+.important-note
+  background: linear-gradient(135deg, #fff8e1, #fffacd)
+  border: 2px solid #ffc107
+  border-radius: 12px
+  padding: 2rem
+  margin: 2rem 0
+  box-shadow: 0 4px 16px rgba(255, 193, 7, 0.2)
+
+  h3
+    color: #e65100
+    margin-bottom: 1.5rem
+    font-size: 1.3rem
+    font-weight: 700
+    text-align: center
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1)
+
+.behavior-comparison
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr))
+  gap: 1.5rem
+  margin-bottom: 1.5rem
+
+.behavior-item
+  border-radius: 8px
+  padding: 1.5rem
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1)
+  transition: transform 0.3s ease
+
+  &:hover
+    transform: translateY(-2px)
+
+  h4
+    margin-bottom: 1rem
+    font-size: 1.1rem
+    font-weight: 600
+    display: flex
+    align-items: center
+    gap: 0.5rem
+
+  p
+    margin: 0
+    line-height: 1.6
+    color: #2c3e50
+
+    strong
+      font-weight: 700
+
+.rxjs-behavior
+  background: linear-gradient(135deg, #ffebee, #fce4ec)
+  border-left: 4px solid #e91e63
+
+  h4
+    color: #ad1457
+
+.signals-behavior
+  background: linear-gradient(135deg, #e8f5e8, #f1f8e9)
+  border-left: 4px solid #4caf50
+
+  h4
+    color: #2e7d32
+
+.performance-note
+  background: rgba(255,255,255,0.7)
+  border: 1px solid #e0e0e0
+  border-radius: 8px
+  padding: 1rem
+  margin: 0
+  text-align: center
+  color: #424242
+  font-style: italic
+
+  strong
+    color: #ff6f00
+    font-weight: 700
+
+// Calculator specific styles
+.calculators-grid
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr))
+  gap: 2rem
+  margin: 3rem 0
+
+.calculator-card
+  background: white
+  border-radius: 16px
+  padding: 2rem
+  box-shadow: 0 6px 30px rgba(0,0,0,0.1)
+  border: 2px solid transparent
+  transition: all 0.3s ease
+
+  &:hover
+    transform: translateY(-4px)
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15)
+
+.signals-theme
+  border-color: #28a745
+
+  &:hover
+    border-color: #218838
+    box-shadow: 0 12px 40px rgba(40, 167, 69, 0.2)
+
+.rxjs-theme
+  border-color: #fd7e14
+
+  &:hover
+    border-color: #e36209
+    box-shadow: 0 12px 40px rgba(253, 126, 20, 0.2)
+
+.calculator-header
+  display: flex
+  justify-content: space-between
+  align-items: center
+  margin-bottom: 2rem
+  padding-bottom: 1rem
+  border-bottom: 2px solid #f8f9fa
+
+  h2
+    margin: 0
+    font-size: 1.5rem
+    font-weight: 700
+    color: #2c3e50
+
+.tech-badge
+  padding: 0.5rem 1rem
+  border-radius: 20px
+  font-size: 0.8rem
+  font-weight: 600
+  text-transform: uppercase
+  letter-spacing: 0.5px
+
+.signals-badge
+  background: linear-gradient(135deg, #28a745, #20c997)
+  color: white
+
+.rxjs-badge
+  background: linear-gradient(135deg, #fd7e14, #e83e8c)
+  color: white
+
+.input-controls
+  display: grid
+  grid-template-columns: 1fr 1fr
+  gap: 1.5rem
+  margin-bottom: 2rem
+
+.control-group
+  text-align: center
+
+  label
+    display: block
+    font-weight: 600
+    margin-bottom: 0.75rem
+    color: #2c3e50
+    font-size: 1rem
+
+.counter-controls
+  display: flex
+  align-items: center
+  justify-content: center
+  gap: 0.75rem
+  background: #f8f9fa
+  border-radius: 12px
+  padding: 0.75rem
+
+.counter-btn
+  width: 40px
+  height: 40px
+  border: none
+  border-radius: 50%
+  font-size: 1.2rem
+  font-weight: 700
+  cursor: pointer
+  transition: all 0.3s ease
+  display: flex
+  align-items: center
+  justify-content: center
+
+  &.increment
+    background: linear-gradient(135deg, #28a745, #20c997)
+    color: white
+
+    &:hover
+      background: linear-gradient(135deg, #218838, #1fa884)
+      transform: scale(1.1)
+
+  &.decrement
+    background: linear-gradient(135deg, #dc3545, #e83e8c)
+    color: white
+
+    &:hover
+      background: linear-gradient(135deg, #c82333, #d91a72)
+      transform: scale(1.1)
+
+  &:active
+    transform: scale(0.95)
+
+.counter-value
+  font-size: 1.5rem
+  font-weight: 700
+  color: #2c3e50
+  min-width: 3rem
+  text-align: center
+  background: white
+  padding: 0.5rem 1rem
+  border-radius: 8px
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1)
+
+.batch-control
+  text-align: center
+  padding: 1.5rem 0
+  border-top: 2px solid #f8f9fa
+  margin-top: 1rem
+
+.batch-button
+  background: linear-gradient(135deg, #6c5ce7, #a29bfe)
+  color: white
+  border: none
+  padding: 1rem 2rem
+  border-radius: 12px
+  font-weight: 700
+  font-size: 1rem
+  cursor: pointer
+  transition: all 0.3s ease
+  box-shadow: 0 4px 16px rgba(108, 92, 231, 0.3)
+  text-transform: uppercase
+  letter-spacing: 0.5px
+  display: inline-block
+  margin-bottom: 0.75rem
+
+  &:hover
+    transform: translateY(-3px)
+    box-shadow: 0 8px 24px rgba(108, 92, 231, 0.4)
+
+  &:active
+    transform: translateY(-1px)
+    box-shadow: 0 2px 8px rgba(108, 92, 231, 0.2)
+
+.signals-batch
+  background: linear-gradient(135deg, #28a745, #20c997)
+  box-shadow: 0 4px 16px rgba(40, 167, 69, 0.3)
+
+  &:hover
+    background: linear-gradient(135deg, #218838, #1fa884)
+    box-shadow: 0 8px 24px rgba(40, 167, 69, 0.4)
+
+.rxjs-batch
+  background: linear-gradient(135deg, #fd7e14, #e83e8c)
+  box-shadow: 0 4px 16px rgba(253, 126, 20, 0.3)
+
+  &:hover
+    background: linear-gradient(135deg, #e36209, #d91a72)
+    box-shadow: 0 8px 24px rgba(253, 126, 20, 0.4)
+
+.batch-note
+  display: block
+  color: #6c757d
+  font-style: italic
+  font-size: 0.85rem
+  margin-top: 0.5rem
+  font-weight: 500
+
+.result-container
+  text-align: center
+  padding: 2rem
+  border-radius: 12px
+  position: relative
+
+.signals-result
+  background: linear-gradient(135deg, #e8f5e8, #d4edda)
+  border: 2px solid #28a745
+
+.rxjs-result
+  background: linear-gradient(135deg, #fff3cd, #fce4ec)
+  border: 2px solid #fd7e14
+
+.calculation-display
+  margin-bottom: 1rem
+
+.formula
+  font-size: 1.5rem
+  font-weight: 600
+  color: #2c3e50
+  margin-right: 0.5rem
+
+  sup
+    font-size: 1rem
+
+.result-value
+  font-size: 2.5rem
+  font-weight: 700
+  color: #e74c3c
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1)
+
+.tech-info
+  color: #6c757d
+  font-style: italic
+
+// Implementation details section
+.implementation-details
+  background: white
+  border-radius: 12px
+  padding: 2rem
+  margin: 3rem 0
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08)
+
+  h3
+    color: #2c3e50
+    margin-bottom: 2rem
+    font-size: 1.5rem
+    font-weight: 700
+    text-align: center
+
+.code-comparison
+  display: grid
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr))
+  gap: 2rem
+
+.code-block
+  border-radius: 8px
+  overflow: hidden
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1)
+
+  h4
+    margin: 0
+    padding: 1rem 1.5rem
+    font-size: 1.1rem
+    font-weight: 600
+    color: white
+
+  pre
+    margin: 0
+    background: #2d3748
+    color: #e2e8f0
+    padding: 1.5rem
+    overflow-x: auto
+    font-size: 0.9rem
+    line-height: 1.5
+
+    code
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace
+
+.signals-code
+  h4
+    background: linear-gradient(135deg, #28a745, #20c997)
+
+.rxjs-code
+  h4
+    background: linear-gradient(135deg, #fd7e14, #e83e8c)

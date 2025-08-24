@@ -1,0 +1,213 @@
+<div class="state-management-container">
+  <div class="header-section">
+    <h1 class="main-title">State Management Comparison</h1>
+    <p class="subtitle">Signals vs RxJS for Reactive State Management</p>
+  </div>
+
+  <div class="explanation-section">
+    <h2>Reactive State Management Approaches:</h2>
+    <ol class="steps-list">
+      <li>
+        <strong>Signals</strong> provide fine-grained reactivity with automatic dependency tracking
+      </li>
+      <li>
+        <strong>RxJS</strong> offers powerful stream-based reactive programming with observables
+      </li>
+      <li><strong>Both approaches</strong> enable reactive updates when state changes</li>
+    </ol>
+
+    <div class="comparison-grid">
+      <div class="comparison-card signals-cd">
+        <h3>⚡ Angular Signals</h3>
+        <ul>
+          <li>✅ <strong>Fine-grained reactivity</strong> - Only updates what actually changed</li>
+          <li>
+            ✅ <strong>Automatic dependency tracking</strong> - No manual subscription management
+          </li>
+          <li>
+            ✅ <strong>Built-in computed values</strong> - Automatically recalculates when
+            dependencies change
+          </li>
+          <li>✅ <strong>Memory efficient</strong> - No subscription cleanup needed</li>
+          <li>🔧 <strong>New in Angular</strong> - Modern approach for state management</li>
+        </ul>
+      </div>
+
+      <div class="comparison-card rxjs-cd">
+        <h3>🌊 RxJS Observables</h3>
+        <ul>
+          <li>
+            ✅ <strong>Powerful stream operations</strong> - Rich set of operators for complex logic
+          </li>
+          <li>
+            ✅ <strong>Async handling</strong> - Excellent for handling API calls and async
+            operations
+          </li>
+          <li>✅ <strong>Composable streams</strong> - Combine multiple data sources easily</li>
+          <li>⚠️ <strong>Manual subscription management</strong> - Need to handle unsubscribe</li>
+          <li>📚 <strong>Mature ecosystem</strong> - Well-established patterns and community</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="test-instruction">
+      <strong>Test Both Approaches:</strong> Use the controls below to modify the base (a) and
+      exponent (b) values. Notice how both Signals and RxJS automatically update the computed result
+      a^b in real-time.
+    </p>
+
+    <div class="important-note">
+      <h3>⚡ Key Behavioral Difference:</h3>
+      <div class="behavior-comparison">
+        <div class="behavior-item rxjs-behavior">
+          <h4>🌊 RxJS Observable:</h4>
+          <p>
+            <strong>Emits on EVERY dependency change</strong> - If you change multiple values quickly,
+            RxJS will trigger the calculation and emit a new result for each individual change.
+          </p>
+        </div>
+        <div class="behavior-item signals-behavior">
+          <h4>⚡ Angular Signals:</h4>
+          <p>
+            <strong>Calculates ONCE at the end</strong> - Signals batch all changes and only compute
+            the final result once at the end of the task/change detection cycle, making it more efficient.
+          </p>
+        </div>
+      </div>
+      <p class="performance-note">
+        💡 <strong>Performance Impact:</strong> This makes Signals more efficient for complex calculations
+        when multiple dependencies might change simultaneously.
+      </p>
+    </div>
+  </div>
+
+  <div class="calculators-grid">
+    <!-- Signals Calculator -->
+    <div class="calculator-card signals-theme">
+      <div class="calculator-header">
+        <h2>⚡ Signals Calculator</h2>
+        <span class="tech-badge signals-badge">Angular Signals</span>
+      </div>
+
+      <div class="input-controls">
+        <div class="control-group">
+          <label>Base (a):</label>
+          <div class="counter-controls">
+            <button class="counter-btn decrement" (click)="onCountValue1Decrement()">−</button>
+            <span class="counter-value">{{ countValue1() }}</span>
+            <button class="counter-btn increment" (click)="onCountValue1Increment()">+</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Exponent (b):</label>
+          <div class="counter-controls">
+            <button class="counter-btn decrement" (click)="onCountValue2Decrement()">−</button>
+            <span class="counter-value">{{ countValue2() }}</span>
+            <button class="counter-btn increment" (click)="onCountValue2Increment()">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="batch-control">
+        <button class="batch-button signals-batch" (click)="onBothValuesIncrement()">
+          ⚡ Increment Both Values
+        </button>
+        <small class="batch-note">Watch how Signals batch the changes!</small>
+      </div>
+
+      <div class="result-container signals-result">
+        <div class="calculation-display">
+          <span class="formula"
+            >{{ countValue1() }}<sup>{{ countValue2() }}</sup> =
+          </span>
+          <span class="result-value">{{ powerResultSignal() }}</span>
+        </div>
+        <div class="tech-info">
+          <small>🔧 Computed signal automatically updates</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- RxJS Calculator -->
+    <div class="calculator-card rxjs-theme">
+      <div class="calculator-header">
+        <h2>🌊 RxJS Calculator</h2>
+        <span class="tech-badge rxjs-badge">RxJS Observables</span>
+      </div>
+
+      <div class="input-controls">
+        <div class="control-group">
+          <label>Base (a):</label>
+          <div class="counter-controls">
+            <button class="counter-btn decrement" (click)="onCountValueRxjs1Decrement()">−</button>
+            <span class="counter-value">{{ countValueRxjs1.value }}</span>
+            <button class="counter-btn increment" (click)="onCountValueRxjs1Increment()">+</button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Exponent (b):</label>
+          <div class="counter-controls">
+            <button class="counter-btn decrement" (click)="onCountValueRxjs2Decrement()">−</button>
+            <span class="counter-value">{{ countValueRxjs2.value }}</span>
+            <button class="counter-btn increment" (click)="onCountValueRxjs2Increment()">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="batch-control">
+        <button class="batch-button rxjs-batch" (click)="onBothValuesRxjsIncrement()">
+          🌊 Increment Both Values
+        </button>
+        <small class="batch-note">Watch how RxJS emits multiple times!</small>
+      </div>
+
+      <div class="result-container rxjs-result">
+        <div class="calculation-display">
+          <span class="formula"
+            >{{ countValueRxjs1.value }}<sup>{{ countValueRxjs2.value }}</sup> =
+          </span>
+          <span class="result-value">{{ powerResultRxjs$ | async }}</span>
+        </div>
+        <div class="tech-info">
+          <small>🔧 CombineLatest + map operators with async pipe</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="implementation-details">
+    <h3>Implementation Comparison:</h3>
+    <div class="code-comparison">
+            <div class="code-block signals-code">
+        <h4>Signals Approach:</h4>
+        <pre><code>// Reactive values
+countValue1 = signal(2);
+countValue2 = signal(3);
+
+// Computed value
+powerResult = computed(() => {{ '{' }}
+  const base = this.countValue1();
+  const exponent = this.countValue2();
+  return Math.pow(base, exponent);
+{{ '}' }});</code></pre>
+      </div>
+
+      <div class="code-block rxjs-code">
+        <h4>RxJS Approach:</h4>
+        <pre><code>// Reactive streams
+countValue1 = new BehaviorSubject(2);
+countValue2 = new BehaviorSubject(3);
+
+// Combined stream
+powerResult$ = combineLatest([
+  this.countValue1.asObservable(),
+  this.countValue2.asObservable()
+]).pipe(
+  map(([base, exp]) => Math.pow(base, exp))
+);</code></pre>
+      </div>
+    </div>
+  </div>
+</div>

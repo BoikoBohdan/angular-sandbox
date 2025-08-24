@@ -1,59 +1,59 @@
-# AngularPlayground
+# 🚀 Angular Playground
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.0.
+A hands-on Angular research project demonstrating modern Angular features, performance concepts, and state management patterns.
 
-## Development server
+## 🎯 What's Inside
 
-To start a local development server, run:
+- **🔄 Change Detection Strategies** - Compare Default vs OnPush performance
+- **⚡ State Management** - Signals vs RxJS reactive patterns
+- **📊 Interactive Demos** - Live examples with visual feedback
+
+## 🚀 Quick Start
 
 ```bash
+# Install dependencies
+npm install
+
+# Start development server  
 ng serve
+
+# Open http://localhost:4200
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 📚 Research Topics
 
-## Code scaffolding
+### 1. Change Detection (`/re-render-tree`)
+Compare how Angular's default change detection vs OnPush strategy affects performance when parent components mutate child properties.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+**Key Insight:** OnPush doesn't track parent mutations but is more performant. Default works automatically but checks everything.
 
-```bash
-ng generate component component-name
-```
+### 2. State Management (`/signal-rxjs`) 
+Interactive comparison between Angular Signals and RxJS for reactive state management using power calculation (a^b).
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+**Key Insight:** RxJS emits on every dependency change, Signals batch changes and compute once at the end.
 
-```bash
-ng generate --help
-```
+## 📸 Screenshots
 
-## Building
+### Change Detection Demo
+![Change Detection](./docs/change_detection_example_ui.png)  
+*Testing parent mutation: Default components update, OnPush components don't*
 
-To build the project run:
+### State Management Comparison
+![State Management](./docs/singals_and_rxjs_ui.png)
+*Side-by-side calculators: Check console to see RxJS emits twice, Signals emit once*
 
-```bash
-ng build
-```
+### Batch Update Test
+![Batch Update](./docs/signals_and_rxjs_logs.png)
+*Click "Increment Both Values" - RxJS logs 2 emissions, Signals log 1 emission*
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 🔧 Tech Stack
 
-## Running unit tests
+- Angular 18+
+- TypeScript 5+  
+- Angular Signals
+- RxJS
+- SASS
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Explore the live demos to understand the concepts hands-on! 🎮**

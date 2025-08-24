@@ -1,0 +1,72 @@
+<div class="re-render-container">
+  <div class="header-section">
+    <h1 class="main-title">Re-render Tree Demonstration</h1>
+    <p class="subtitle">Zone.js change detection without any state changes</p>
+  </div>
+
+  <div class="explanation-section">
+    <h2>How Change Detection Works:</h2>
+    <ol class="steps-list">
+      <li><strong>Zone.js automatically triggers change detection</strong> on any user interaction (click, input, mouse move, etc.)</li>
+      <li><strong>API calls and async operations</strong> also trigger change detection cycles</li>
+      <li><strong>By default</strong>, Angular checks ALL components in the tree for changes</li>
+    </ol>
+
+    <div class="comparison-grid">
+      <div class="comparison-card default-cd">
+        <h3>🔄 Default Change Detection</h3>
+        <ul>
+          <li>✅ <strong>Works fine</strong> - UI updates automatically when parent mutates child properties</li>
+          <li>⚠️ <strong>Performance cost</strong> - Zone.js checks every component on every change detection cycle</li>
+          <li>🔍 Heavy procedure that should be used carefully in large applications</li>
+        </ul>
+      </div>
+
+      <div class="comparison-card onpush-cd">
+        <h3>🎯 OnPush Change Detection</h3>
+        <ul>
+          <li>❌ <strong>Doesn't track parent mutations</strong> - UI won't update when parent changes child properties</li>
+          <li>✅ <strong>Performance optimized</strong> - Only checks when inputs change or events occur</li>
+          <li>🔧 Requires manual change detection or immutable data patterns</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="test-instruction">
+      <strong>Test Instructions:</strong> Click the button below to mutate child component data.
+      Notice how components without OnPush update immediately, while OnPush components remain unchanged.
+    </p>
+  </div>
+
+  <button class="parent-mutate-button" (click)="onTotalCountIncrement()">Test Parent To Mutate Child</button>
+
+  <h1>Components without Change Detection</h1>
+  <div class="components-grid">
+    @for (component of listSimpleComponents; track component; let i = $index) {
+    <div class="component-card" [attr.data-index]="i + 1">
+      <div class="card-header">
+        <span class="component-number">{{ i + 1 }}</span>
+        <span class="component-label">Component</span>
+      </div>
+      <div class="card-content">
+        <app-zone-child [componentData]="component"></app-zone-child>
+      </div>
+    </div>
+    }
+  </div>
+
+  <h1>Components with Change Detection</h1>
+  <div class="components-grid">
+    @for (component of listComponentsWithChangeDetection; track component; let i = $index) {
+    <div class="component-card" [attr.data-index]="i + 1">
+      <div class="card-header">
+        <span class="component-number">{{ i + 1 }}</span>
+        <span class="component-label">Component</span>
+      </div>
+      <div class="card-content">
+        <app-on-push-child [componentData]="component"></app-on-push-child>
+      </div>
+    </div>
+    }
+  </div>
+</div>
