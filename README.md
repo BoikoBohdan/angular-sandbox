@@ -32,6 +32,11 @@ Interactive comparison between Angular Signals and RxJS for reactive state manag
 
 **Key Insight:** RxJS emits on every dependency change, Signals batch changes and compute once at the end.
 
+### 3. Crypto Portfolio (`/crypto-portfolio`)
+RxJS-based portfolio management with BehaviorSubjects, combineLatest, and reactive state patterns.
+
+**Key Insight:** Advanced reactive composition with real-time updates and transaction history.
+
 ## 📸 Screenshots
 
 ### Change Detection Demo
@@ -45,6 +50,10 @@ Interactive comparison between Angular Signals and RxJS for reactive state manag
 ### Batch Update Test
 ![Batch Update](./docs/signals_and_rxjs_logs.png)
 *Click "Increment Both Values" - RxJS logs 2 emissions, Signals log 1 emission*
+
+### Crypto Portfolio Demo
+![Crypto Portfolio](./docs/crypto-portfolio-overview.png)
+*RxJS portfolio management with reactive asset tracking and transaction history*
 
 ## 🔧 Tech Stack
 
